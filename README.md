@@ -4,7 +4,7 @@ Docker Images | PHP Builder (php, node, compose, etc)
 
 ## Authentification
 
-### Prérequis
+* Prérequis
 
 Créer un "Personal Access Token" > https://github.com/settings/tokens
 
@@ -14,7 +14,7 @@ Créer un "Personal Access Token" > https://github.com/settings/tokens
 > * write:packages
 > * delete:packages
 
-### Docker Login
+* Docker Login
 
 ```
 GHCR_USERNAME="XXX"
@@ -25,10 +25,13 @@ echo $GHCR_PAT | docker login ghcr.io -u GHCR_USERNAME --password-stdin
 ## Préparation
 
 ```
-# Se logguer sur le Registry privé (à faire une seule fois par session)
-docker login ghcr.io
-
 # Tagguer l'image
 docker build -t ghcr.io/maloups/docker-images-php-builder:dev .
 docker push ghcr.io/maloups/docker-images-php-builder:dev
 ```
+
+## Github Administration - Public Docker Image
+
+1- Désactiver "Inherit access from source repository" > https://github.com/settings/packages
+2- Sélectionner le package concerné > https://github.com/maloups?tab=packages
+3- Package Setting > Danger Zone > Change Visibility
