@@ -9,9 +9,6 @@ ENV COMPOSER_VERSION=2.2.4
 ENV COMPOSER_ALLOW_SUPERUSER=1
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/api/public
 
-# NECESSAIRE POUR XDEBUG
-ENV PHP_IDE_CONFIG=$PHP_IDE_CONFIG
-
 COPY ./apache/000-default.conf /etc/apache2/sites-available/
 COPY ./php/config/php.ini $PHP_INI_DIR/php.ini
 COPY ./php/config/php-cli.ini $PHP_INI_DIR/php-cli.ini
@@ -25,6 +22,8 @@ RUN curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg -
 ENV NODE_MAJOR=20
 RUN echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list
 
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 # ********************************************************
 # * Anything else you want to do like clean up goes here *
 # ********************************************************
@@ -49,7 +48,8 @@ RUN apt-get update -qq && \
     curl=7.* \
     nodejs \
     linux-libc-dev=6.1.128-1\
-    expat=2.5.0-1+deb12u1
+    expat=2.5.0-1+deb12u1 \
+    yarn
 
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

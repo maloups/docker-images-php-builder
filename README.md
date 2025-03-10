@@ -26,8 +26,8 @@ echo $GHCR_PAT | docker login ghcr.io -u GHCR_USERNAME --password-stdin
 
 ```
 # Tagguer l'image
-docker build -t ghcr.io/maloups/docker-images-php-builder:dev .
-docker push ghcr.io/maloups/docker-images-php-builder:dev
+docker build -t ghcr.io/maloups/php-tools:8.3.13-01 .
+docker push ghcr.io/maloups/php-tools:8.3.13-01
 ```
 
 ## Github Administration - Public Docker Image
